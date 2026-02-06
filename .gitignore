@@ -1,0 +1,6 @@
+/target
+/arkheion.db
+/arkheion.db-journal
+.env
+*.rs.bk
+Cargo.lock
