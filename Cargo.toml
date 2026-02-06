@@ -1,17 +1,30 @@
 [package]
 name = "arkheion_engine"
-version = "1.0.0"
+version = "2.0.0"
 edition = "2021"
 
 [dependencies]
+# 1. Web Framework (Backend API)
 axum = { version = "0.7", features = ["macros"] }
-tokio = { version = "1.0", features = ["full"] }
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-solana-client = "1.18"
-solana-sdk = "1.18"
-# Kita matikan default features biar gak narik MySQL/Postgres yang bikin berat & error
-sqlx = { version = "0.7", default-features = false, features = ["runtime-tokio-rustls", "sqlite", "macros"] }
 tower = { version = "0.4", features = ["util"] }
 tower-http = { version = "0.5", features = ["cors", "fs", "trace"] }
-chrono = { version = "0.4", features = ["serde"] }
+tokio = { version = "1.0", features = ["full"] }
+
+# 2. Database (SQLite - Hemat VPS)
+sqlx = { version = "0.7", default-features = false, features = ["runtime-tokio-rustls", "sqlite", "macros", "chrono"] }
+
+# 3. Serialization (Data JSON)
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# 4. Web3 & Crypto (Login Solana)
+solana-client = "1.18"
+solana-sdk = "1.18"
+bs58 = "0.5"      
+hmac = "0.12"    
+sha2 = "0.10"     
+rand = "0.8"      
+
+# 5. Utils
+chrono = { version = "0.4", features = ["serde"] } 
+dotenvy = "0.15"  
