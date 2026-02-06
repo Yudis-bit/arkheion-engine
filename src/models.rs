@@ -1,6 +1,9 @@
 use serde::{Deserialize, Serialize};
 use sqlx::FromRow;
 use chrono::{DateTime, Utc};
+use std::sync::{Arc, Mutex};
+use sqlx::{Pool, Sqlite};
+use crate::engine::EngineMetrics;
 
 #[derive(Debug, FromRow, Serialize, Deserialize)]
 pub struct User {
@@ -29,4 +32,9 @@ pub struct PaymentTx {
     pub amount_sol: f64,
     pub status: String,          
     pub created_at: DateTime<Utc>,
+}
+#[derive(Clone)]
+pub struct AppState {
+    pub db: Pool<Sqlite>,
+    pub metrics: Arc<Mutex<EngineMetrics>>,
 }
